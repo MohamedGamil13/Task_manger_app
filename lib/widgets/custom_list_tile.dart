@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:task_manger_app/widgets/Custom_icon.dart';
 
 class CustomListTile extends StatelessWidget {
-  const CustomListTile({super.key, required this.image});
+  const CustomListTile({
+    super.key,
+    required this.image,
+    required this.onpressed,
+  });
   final String image;
+  final VoidCallback onpressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,7 +32,10 @@ class CustomListTile extends StatelessWidget {
                   Image.network(image, height: 60),
                 ],
               ),
-              trailing: CustomIcon(pageicon: Icons.arrow_forward),
+              trailing: CustomIcon(
+                pageicon: Icons.arrow_forward,
+                onpressed: onpressed,
+              ),
             ),
           ),
         ),

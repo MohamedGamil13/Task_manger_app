@@ -1,1 +1,1 @@
-const String KappName = "Taskito";
+const String KappName = "askito";
