@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -34,11 +35,36 @@ class LoginCubit extends Cubit<LoginState> {
 
       // Once signed in, return the UserCredential
       await FirebaseAuth.instance.signInWithCredential(credential);
-      print(googleUser.email);
       emit(LoginSucess());
     } on Exception catch (e) {
       emit(LoginFailure());
       print(e);
+    }
+  }
+
+  Future<void> signInWithFacebook() async {
+    try {
+      final LoginResult loginResult = await FacebookAuth.instance.login();
+
+      if (loginResult.status == LoginStatus.success &&
+          loginResult.accessToken != null) {
+        final OAuthCredential facebookAuthCredential =
+            FacebookAuthProvider.credential(
+              loginResult.accessToken!.tokenString,
+            );
+
+        await FirebaseAuth.instance.signInWithCredential(
+          facebookAuthCredential,
+        );
+
+        print(" Facebook login successful!");
+      } else {
+        print(
+          " Facebook login failed: ${loginResult.status} - ${loginResult.message}",
+        );
+      }
+    } catch (e) {
+      print(" Error during Facebook sign-in: $e");
     }
   }
 }

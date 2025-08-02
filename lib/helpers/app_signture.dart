@@ -3,16 +3,21 @@ import 'package:task_manger_app/helpers/app_logo.dart';
 import 'package:task_manger_app/helpers/constants.dart';
 
 class AppSignture extends StatelessWidget {
-  const AppSignture({super.key});
-
+  const AppSignture({
+    super.key,
+    required this.fontSize,
+    required this.logoHeight,
+  });
+  final double fontSize;
+  final double logoHeight;
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
-        AppLogo(),
+        AppLogo(height: logoHeight),
         Padding(
-          padding: EdgeInsets.only(left: 8.0),
-          child: Text(KappName, style: TextStyle(fontSize: 50)),
+          padding: EdgeInsets.only(left: 6.0),
+          child: Text(KappName, style: TextStyle(fontSize: fontSize)),
         ),
       ],
     );

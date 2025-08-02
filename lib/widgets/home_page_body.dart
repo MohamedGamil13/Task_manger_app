@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_manger_app/cubits/login_cubit/login_cubit.dart';
+import 'package:task_manger_app/cubits/cubit/login_cubit.dart';
 import 'package:task_manger_app/helpers/app_signture.dart';
 import 'package:task_manger_app/widgets/custom_list_tile.dart';
 import 'package:task_manger_app/widgets/custom_text.dart';
@@ -17,7 +17,7 @@ class HomePageBody extends StatelessWidget {
           SizedBox(height: 100),
           Padding(
             padding: const EdgeInsets.only(left: 80.0),
-            child: AppSignture(),
+            child: AppSignture(fontSize: 50, logoHeight: 65),
           ),
           SizedBox(height: 100),
           CustomText(text: 'Manage'),

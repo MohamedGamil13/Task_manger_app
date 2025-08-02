@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manger_app/pages/Board_page.dart';
 import 'package:task_manger_app/pages/home_page.dart';
 
 class TaskMangerApp extends StatelessWidget {
@@ -7,7 +8,7 @@ class TaskMangerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const HomePage(),
+      home: const BoardPage(),
       theme: ThemeData(fontFamily: 'Poppins'),
     );
   }
