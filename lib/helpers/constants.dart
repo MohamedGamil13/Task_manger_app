@@ -1,0 +1,1 @@
+const String KappName = "Taskito";
