@@ -8,8 +8,9 @@ class TaskMangerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const BoardPage(),
+      home: const HomePage(),
       theme: ThemeData(fontFamily: 'Poppins'),
+      routes: {"BordarPage": (context) => BoardPage()},
     );
   }
 }

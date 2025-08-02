@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:task_manger_app/helpers/app_signture.dart';
-import 'package:task_manger_app/widgets/custom_text.dart';
 
 class BoardAppbar extends StatelessWidget {
   const BoardAppbar({super.key});

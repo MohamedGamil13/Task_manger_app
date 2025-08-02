@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manger_app/widgets/card_content.dart';
 
 class TaskCard extends StatelessWidget {
   const TaskCard({super.key});
@@ -10,7 +11,7 @@ class TaskCard extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width - 30,
         height: MediaQuery.of(context).size.height / 4 - 50,
-        child: const Card(color: Colors.amber, child: Row()),
+        child: const Card(color: Colors.amber, child: CardContent()),
       ),
     );
   }
