@@ -39,8 +39,8 @@ class HomePageBody extends StatelessWidget {
                 child: AppSignture(fontSize: 50, logoHeight: 65),
               ),
               SizedBox(height: 100),
-              CustomText(text: 'Manage'),
-              CustomText(text: 'your task easily'),
+              CustomText(text: 'Manage', fonstsize: 35),
+              CustomText(text: 'your task easily', fonstsize: 35),
               Text("Easy way to manage your tasks "),
               SizedBox(height: 85),
               CustomListTile(
