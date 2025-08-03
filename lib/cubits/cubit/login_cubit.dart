@@ -12,59 +12,42 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       emit(LoginLoading());
 
-      // Initialize Google Sign-In
+      // 1. إنشاء كائن GoogleSignIn بالطريقة الجديدة
       await GoogleSignIn.instance.initialize(
         serverClientId:
             "625420286680-50g250lbffp65bnqob91cdq0salh666t.apps.googleusercontent.com",
       );
-      // Trigger the authentication flow
+
+      // 2. تأكد من تسجيل الخروج السابق عشان يبدأ من جديد
+      await GoogleSignIn.instance.signOut();
+
+      // 3. بدء عملية تسجيل الدخول
       final GoogleSignInAccount? googleUser = await GoogleSignIn.instance
           .authenticate();
+
+      // 4. في حالة تم الإلغاء
       if (googleUser == null) {
         emit(LoginFailure());
         return;
       }
 
-      // Obtain the auth details from the request
-      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+      // 5. جلب التوكن
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
-      // Create a new credential
+      // 6. تكوين الكريدنشيال
       final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.idToken,
         idToken: googleAuth.idToken,
       );
 
-      // Once signed in, return the UserCredential
+      // 7. تسجيل الدخول في Firebase
       await FirebaseAuth.instance.signInWithCredential(credential);
+
       emit(LoginSucess());
-    } on Exception catch (e) {
-      emit(LoginFailure());
-      print(e);
-    }
-  }
-
-  Future<void> signInWithFacebook() async {
-    try {
-      final LoginResult loginResult = await FacebookAuth.instance.login();
-
-      if (loginResult.status == LoginStatus.success &&
-          loginResult.accessToken != null) {
-        final OAuthCredential facebookAuthCredential =
-            FacebookAuthProvider.credential(
-              loginResult.accessToken!.tokenString,
-            );
-
-        await FirebaseAuth.instance.signInWithCredential(
-          facebookAuthCredential,
-        );
-
-        print(" Facebook login successful!");
-      } else {
-        print(
-          " Facebook login failed: ${loginResult.status} - ${loginResult.message}",
-        );
-      }
     } catch (e) {
-      print(" Error during Facebook sign-in: $e");
+      emit(LoginFailure());
+      print("Google Sign-In Error: $e");
     }
   }
 }

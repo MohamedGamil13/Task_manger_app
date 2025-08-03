@@ -15,9 +15,9 @@ class HomePageBody extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginLoading) {
-          print('==========================================EEEErorr');
+          print('==========================================Loading');
         } else if (state is LoginSucess) {
-          print('================Sucess');
+          print('=============================Sucess');
           Navigator.pushNamed(context, 'BordarPage');
         } else if (state is LoginFailure) {
           DialogHelper.showInfoDialog(
@@ -44,16 +44,17 @@ class HomePageBody extends StatelessWidget {
               Text("Easy way to manage your tasks "),
               SizedBox(height: 85),
               CustomListTile(
-                image:
-                    'https://w7.pngwing.com/pngs/523/198/png-transparent-google-logo-google-search-google-play-google-text-logo-number-thumbnail.png',
+                image: 'assets/images/GoogleLogo.png',
                 onpressed: () {
-                  BlocProvider.of<LoginCubit>(context).signInWithGoogle;
+                  // BlocProvider.of<LoginCubit>(context).signInWithGoogle();
+                  Navigator.pushNamed(context, 'BordarPage');
                 },
               ),
               CustomListTile(
-                image:
-                    'https://logos-world.net/wp-content/uploads/2020/05/Facebook-Logo.jpg',
-                onpressed: () {},
+                image: 'assets/images/Facebook-Logo.jpg',
+                onpressed: () {
+                  Navigator.pushNamed(context, 'BordarPage');
+                },
               ),
             ],
           ),

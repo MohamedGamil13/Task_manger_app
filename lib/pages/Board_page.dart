@@ -11,11 +11,11 @@ class BoardPage extends StatelessWidget {
       body: const BoardPageBody(),
       backgroundColor: const Color(0xfff0f4fd),
       appBar: AppBar(
-        // backgroundColor: Color(0xffb854f2),
+        // backgroundColor: Color(0xff00b2ff),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xff952bb3), Color(0xff2292f8)],
+              colors: [Color(0xff00b2ff), Color(0xff2292f8)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),

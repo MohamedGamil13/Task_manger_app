@@ -11,7 +11,7 @@ class DialogHelper {
   }) {
     AwesomeDialog(
       context: context,
-      dialogType: DialogType.info,
+      dialogType: DialogType.error,
       animType: AnimType.rightSlide,
       title: title,
       desc: description,

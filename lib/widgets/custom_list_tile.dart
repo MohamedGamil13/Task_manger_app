@@ -29,7 +29,7 @@ class CustomListTile extends StatelessWidget {
                     'Sign In with ',
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
-                  Image.network(image, height: 60),
+                  Image.asset(image, height: 60),
                 ],
               ),
               trailing: CustomIcon(
