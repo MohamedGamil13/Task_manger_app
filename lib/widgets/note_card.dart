@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:task_manger_app/colors/note_color.dart';
 import 'package:task_manger_app/widgets/card_content.dart';
 import 'package:task_manger_app/widgets/custom_text.dart';
 
@@ -29,7 +28,7 @@ class NoteCard extends StatelessWidget {
           subtitle: Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
             child: CustomText(
-              text: 'today i will do something nice  ',
+              text: 'today i will do something nice ',
               fonstsize: 15,
             ),
           ),

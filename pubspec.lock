@@ -577,10 +577,10 @@ packages:
     dependency: "direct main"
     description:
       name: loading_overlay
-      sha256: c51341550b297e048ac95549bd7ecbe746754130102ea1e36da2a5fdb09f5fab
+      sha256: "9bfcc53463b2aba2d05abf7bb3925edf08d166460369c9662f79b12f8cdf0c9b"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.2"
+    version: "0.4.3"
   logging:
     dependency: transitive
     description:
