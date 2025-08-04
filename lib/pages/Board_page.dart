@@ -14,10 +14,18 @@ class BoardPage extends StatelessWidget {
       appBar: AppBar(
         // backgroundColor: Color(0xff00b2ff),
         flexibleSpace: Container(
-          decoration: const BoxDecoration(color: Color(0xff00b2ff)),
+          decoration: const BoxDecoration(
+            //color: Color(0xfff0f4fd)
+            gradient: LinearGradient(
+              colors: [Color(0xff00b2ff), Color(0xfff0f4fd)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
         ),
       ),
       floatingActionButton: AddNoteFloatingbutton(),
     );
   }
 }
+//0xff00b2ff

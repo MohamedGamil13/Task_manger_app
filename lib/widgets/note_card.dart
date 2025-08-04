@@ -4,8 +4,8 @@ import 'package:task_manger_app/widgets/card_content.dart';
 import 'package:task_manger_app/widgets/custom_text.dart';
 
 class NoteCard extends StatelessWidget {
-  const NoteCard({super.key});
-
+  const NoteCard({super.key, required this.noteColor});
+  final MaterialColor? noteColor;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,7 +14,7 @@ class NoteCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
-            colors: [noteColors[1], noteColors[1].shade200],
+            colors: [noteColor!, noteColor!.shade200],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manger_app/colors/note_color.dart';
 import 'package:task_manger_app/widgets/note_card.dart';
 
 class TaskCardList extends StatelessWidget {
@@ -7,9 +8,9 @@ class TaskCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 20,
+      itemCount: 100,
       itemBuilder: (context, index) {
-        return NoteCard();
+        return NoteCard(noteColor: noteColors[index % 19]);
       },
     );
 

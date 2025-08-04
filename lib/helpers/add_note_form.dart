@@ -47,6 +47,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 // inputValidtion(context);
               },
             ),
+            SizedBox(height: 20),
           ],
         ),
       ),

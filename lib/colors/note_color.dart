@@ -16,4 +16,8 @@ const List<MaterialColor> noteColors = [
   Colors.lime,
   Colors.orange,
   Colors.pink,
+  Colors.purple,
+  Colors.red,
+  Colors.teal,
+  Colors.yellow,
 ];
