@@ -13,6 +13,5 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Hive.registerAdapter(NoteModelAdapter());
   await Hive.openBox<NoteModel>(KnoteBoxName);
-
   runApp(const TaskMangerApp());
 }
