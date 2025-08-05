@@ -7,6 +7,7 @@ import 'package:task_manger_app/models/note_model.dart';
 part 'add_note_state.dart';
 
 class AddNoteCubit extends Cubit<AddNoteState> {
+  final notebox = Hive.box<NoteModel>(KnoteBoxName);
   AddNoteCubit() : super(AddNoteInitial());
   void addNote({
     required String title,
@@ -14,7 +15,6 @@ class AddNoteCubit extends Cubit<AddNoteState> {
     required int color,
     String? image,
   }) {
-    final notebox = Hive.box<NoteModel>(KnoteBoxName);
     notebox.add(
       NoteModel(title: title, subTitle: subtitle, image: image!, color: color),
     ); //image and color will be default and user taken

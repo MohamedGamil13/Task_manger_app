@@ -21,18 +21,12 @@ class LoginCubit extends Cubit<LoginState> {
       await GoogleSignIn.instance.signOut();
 
       // 3. بدء عملية تسجيل الدخول
-      final GoogleSignInAccount? googleUser = await GoogleSignIn.instance
+      final GoogleSignInAccount googleUser = await GoogleSignIn.instance
           .authenticate();
-
-      // 4. في حالة تم الإلغاء
-      if (googleUser == null) {
-        emit(LoginFailure());
-        return;
-      }
 
       // 5. جلب التوكن
       final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+          googleUser.authentication;
 
       // 6. تكوين الكريدنشيال
       final credential = GoogleAuthProvider.credential(
