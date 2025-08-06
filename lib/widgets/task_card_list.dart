@@ -8,8 +8,14 @@ import 'package:task_manger_app/models/note_model.dart';
 import 'package:task_manger_app/widgets/custom_text.dart';
 import 'package:task_manger_app/widgets/note_card.dart';
 
-class TaskCardList extends StatelessWidget {
+class TaskCardList extends StatefulWidget {
   const TaskCardList({super.key});
+
+  @override
+  State<TaskCardList> createState() => _TaskCardListState();
+}
+
+class _TaskCardListState extends State<TaskCardList> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AddNoteCubit, AddNoteState>(
@@ -24,9 +30,21 @@ class TaskCardList extends StatelessWidget {
         return ListView.builder(
           itemCount: BlocProvider.of<AddNoteCubit>(context).notebox.length,
           itemBuilder: (context, index) {
-            return NoteCard(
-              noteColor: noteColors[index % 19],
-              note: box[index],
+            return GestureDetector(
+              onTap: () async {
+                final res = await Navigator.pushNamed(
+                  context,
+                  "EditNotePage",
+                  arguments: box[index],
+                );
+                if (res == true) {
+                  setState(() {});
+                }
+              },
+              child: NoteCard(
+                noteColor: noteColors[index % 19],
+                note: box[index],
+              ),
             );
           },
         );

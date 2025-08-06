@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_manger_app/pages/Board_page.dart';
+import 'package:task_manger_app/pages/edit_note_page.dart';
 import 'package:task_manger_app/pages/home_page.dart';
 
 class TaskMangerApp extends StatelessWidget {
@@ -11,7 +12,10 @@ class TaskMangerApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
       theme: ThemeData(fontFamily: 'Poppins'),
-      routes: {"BordarPage": (context) => BoardPage()},
+      routes: {
+        "BordarPage": (context) => BoardPage(),
+        "EditNotePage": (context) => EditNotePage(),
+      },
     );
   }
 }

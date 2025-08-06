@@ -40,6 +40,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
           ),
           const SizedBox(height: 32),
           CustomButton(
+            buttonColor: Color(0xff000000),
             text: 'Add Note',
             onTap: () {
               inputValidation(context, formKey);

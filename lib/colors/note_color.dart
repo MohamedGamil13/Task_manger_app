@@ -4,7 +4,6 @@ const List<MaterialColor> noteColors = [
   Colors.blue,
   Colors.cyan,
   Colors.amber,
-
   Colors.blueGrey,
   Colors.brown,
   Colors.deepOrange,
