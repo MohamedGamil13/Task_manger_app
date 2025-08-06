@@ -11,20 +11,19 @@ class AddNoteFloatingbutton extends StatelessWidget {
     return FloatingActionButton(
       child: Icon(Icons.add),
       onPressed: () {
-        final cubit = context.read<AddNoteCubit>();
+        final cubit = BlocProvider.of<AddNoteCubit>(context);
+
         showModalBottomSheet(
           context: context,
-          isScrollControlled: true, // مهمة علشان الفورم ما يتقطعش
+          isScrollControlled: true,
           builder: (context) {
             return BlocProvider.value(
               value: cubit,
               child: Padding(
                 padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(
-                    context,
-                  ).viewInsets.bottom, // علشان لما الكيبورد يفتح
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                child: ModelBottomSheetBody(),
+                child: const ModelBottomSheetBody(),
               ),
             );
           },

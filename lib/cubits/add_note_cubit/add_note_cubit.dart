@@ -17,6 +17,15 @@ class AddNoteCubit extends Cubit<AddNoteState> {
   }) {
     notebox.add(
       NoteModel(title: title, subTitle: subtitle, image: image!, color: color),
+    );
+    emit(
+      AddNoteSucess(notes: notebox.values.toList()),
+    ); //image and color will be default and user taken
+  }
+
+  void fetchAllNotes() {
+    emit(
+      AddNoteSucess(notes: notebox.values.toList()),
     ); //image and color will be default and user taken
   }
 }

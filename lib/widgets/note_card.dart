@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manger_app/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:task_manger_app/models/note_model.dart';
 import 'package:task_manger_app/widgets/card_content.dart';
 import 'package:task_manger_app/widgets/custom_text.dart';
 
 class NoteCard extends StatelessWidget {
-  const NoteCard({super.key, required this.noteColor});
+  const NoteCard({super.key, required this.noteColor, required this.note});
   final MaterialColor? noteColor;
+  final NoteModel note;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,15 +26,18 @@ class NoteCard extends StatelessWidget {
           leading: CardContent(),
           title: Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: CustomText(text: 'Note', fonstsize: 30),
+            child: CustomText(text: note.title, fonstsize: 30),
           ),
-          trailing: IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+          trailing: IconButton(
+            onPressed: () {
+              note.delete();
+              BlocProvider.of<AddNoteCubit>(context).fetchAllNotes();
+            },
+            icon: Icon(Icons.delete),
+          ),
           subtitle: Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
-            child: CustomText(
-              text: 'today i will do something nice ',
-              fonstsize: 15,
-            ),
+            child: CustomText(text: note.subTitle, fonstsize: 15),
           ),
         ),
       ),

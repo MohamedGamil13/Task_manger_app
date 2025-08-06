@@ -43,6 +43,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
             text: 'Add Note',
             onTap: () {
               inputValidation(context, formKey);
+              BlocProvider.of<AddNoteCubit>(context).fetchAllNotes();
             },
           ),
           const SizedBox(height: 16),

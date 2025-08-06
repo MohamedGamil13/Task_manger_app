@@ -6,7 +6,12 @@ class ModelBottomSheetBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(child: AddNoteForm());
+    return SingleChildScrollView(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: AddNoteForm(),
+    );
   }
 }
 
