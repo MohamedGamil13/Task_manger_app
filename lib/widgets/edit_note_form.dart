@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger_app/cubits/edit_note_cubit/edit_note_cubit.dart';
 import 'package:task_manger_app/models/note_model.dart';
+import 'package:task_manger_app/widgets/colors_list_view.dart';
 import 'package:task_manger_app/widgets/custom_text_field.dart';
 import 'package:task_manger_app/widgets/custom_button.dart';
 
@@ -45,9 +46,10 @@ class _AddNoteFormState extends State<EditNoteForm> {
               label: 'Content',
               maxlines: 5,
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 20),
+            ColorsListView(),
             CustomButton(
-              buttonColor: Colors.amber,
+              buttonColor: Color(0xff00b2ff),
               text: 'Edit Note',
               onTap: () {
                 inputValidation(context, formKey);
@@ -58,6 +60,7 @@ class _AddNoteFormState extends State<EditNoteForm> {
                 );
               },
             ),
+
             const SizedBox(height: 16),
           ],
         ),

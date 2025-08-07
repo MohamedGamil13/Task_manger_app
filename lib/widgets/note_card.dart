@@ -26,7 +26,7 @@ class NoteCard extends StatelessWidget {
           leading: CardContent(),
           title: Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: CustomText(text: note.title, fonstsize: 30),
+            child: CustomText(text: note.title, fonstsize: 25),
           ),
           trailing: IconButton(
             onPressed: () {
