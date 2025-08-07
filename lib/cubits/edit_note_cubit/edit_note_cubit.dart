@@ -8,6 +8,7 @@ part 'edit_note_state.dart';
 class EditNoteCubit extends Cubit<EditNoteState> {
   EditNoteCubit() : super(EditNoteInitial());
   final notebox = Hive.box<NoteModel>(KnoteBoxName);
+  int? selectedcolor;
   void editNote({
     required NoteModel note,
     required String newTitle,
@@ -18,10 +19,15 @@ class EditNoteCubit extends Cubit<EditNoteState> {
     note.title = newTitle;
     note.subTitle = newSubtitle;
     note.image = newImage ?? note.image;
-    note.color = newColor ?? note.color;
+    note.color = selectedcolor ?? note.color;
 
-    await note.save(); // ده بيعدل النوت فعليًا في Hive
+    await note.save();
 
     emit(EditNoteSucess());
+  }
+
+  void changeNoteColor(int index) {
+    selectedcolor = index;
+    emit(NoteColorChanged());
   }
 }

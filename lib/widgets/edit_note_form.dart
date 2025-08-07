@@ -20,6 +20,8 @@ class _AddNoteFormState extends State<EditNoteForm> {
 
   @override
   Widget build(BuildContext context) {
+    final note = ModalRoute.of(context)!.settings.arguments as NoteModel;
+
     return BlocListener<EditNoteCubit, EditNoteState>(
       listener: (context, state) {
         if (state is EditNoteSucess) {
@@ -49,18 +51,12 @@ class _AddNoteFormState extends State<EditNoteForm> {
             const SizedBox(height: 20),
             ColorsListView(),
             CustomButton(
-              buttonColor: Color(0xff00b2ff),
+              buttonColor: const Color(0xff00b2ff),
               text: 'Edit Note',
               onTap: () {
-                inputValidation(context, formKey);
-                BlocProvider.of<EditNoteCubit>(context).editNote(
-                  note: ModalRoute.of(context)!.settings.arguments as NoteModel,
-                  newTitle: title!,
-                  newSubtitle: subtitle!,
-                );
+                inputValidation(context, formKey, note);
               },
             ),
-
             const SizedBox(height: 16),
           ],
         ),
@@ -68,22 +64,25 @@ class _AddNoteFormState extends State<EditNoteForm> {
     );
   }
 
-  void inputValidation(BuildContext context, dynamic globalKey) {
+  void inputValidation(
+    BuildContext context,
+    GlobalKey<FormState> globalKey,
+    NoteModel note,
+  ) {
     if (globalKey.currentState!.validate()) {
       globalKey.currentState!.save();
-      if (title != null && subtitle != null) {
-        try {
-          // BlocProvider.of<AddNoteCubit>(context).addNote(
-          //   title: title!,
-          //   subtitle: subtitle!,
-          //   color: Colors.blue.value,
-          //   image: '', // Default empty image
-          // );
-        } catch (e) {
-          print('Error accessing EditNoteCubit: $e');
-          // Fallback: just close the sheet
-        }
-      }
+
+      final updatedTitle = title?.isNotEmpty == true ? title! : note.title;
+      final updatedSubtitle = subtitle?.isNotEmpty == true
+          ? subtitle!
+          : note.subTitle;
+
+      BlocProvider.of<EditNoteCubit>(context).editNote(
+        note: note,
+        newTitle: updatedTitle,
+        newSubtitle: updatedSubtitle,
+        newColor: BlocProvider.of<EditNoteCubit>(context).selectedcolor,
+      );
     } else {
       setState(() {
         autovalidateMode = AutovalidateMode.always;

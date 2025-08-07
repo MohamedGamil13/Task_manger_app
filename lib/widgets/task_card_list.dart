@@ -42,7 +42,7 @@ class _TaskCardListState extends State<TaskCardList> {
                 }
               },
               child: NoteCard(
-                noteColor: noteColors[index % 19],
+                noteColor: noteColors[box[index].color % 19 ?? 1],
                 note: box[index],
               ),
             );

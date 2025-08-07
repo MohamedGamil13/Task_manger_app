@@ -61,7 +61,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
           BlocProvider.of<AddNoteCubit>(context).addNote(
             title: title!,
             subtitle: subtitle!,
-            color: Colors.blue.value,
+            color: Colors.cyanAccent.value,
             image: '', // Default empty image
           );
           Navigator.pop(context);

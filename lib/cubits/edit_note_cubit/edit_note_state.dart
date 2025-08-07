@@ -6,3 +6,5 @@ sealed class EditNoteState {}
 final class EditNoteInitial extends EditNoteState {}
 
 final class EditNoteSucess extends EditNoteState {}
+
+final class NoteColorChanged extends EditNoteState {}
