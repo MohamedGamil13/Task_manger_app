@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_manger_app/helpers/app_signture.dart';
+import 'package:task_manger_app/helpers/constants.dart';
+import 'package:task_manger_app/widgets/custom_button.dart';
 import 'package:task_manger_app/widgets/custom_text.dart';
 
 class HomePageBody extends StatelessWidget {
@@ -17,7 +19,14 @@ class HomePageBody extends StatelessWidget {
           SizedBox(height: 100),
           CustomText(text: 'Your thoughts, organized', fonstsize: 25),
           Text("Fast,  Simple,  Secure ", style: TextStyle(fontSize: 15)),
-          SizedBox(height: 25),
+          SizedBox(height: 100),
+          CustomButton(
+            text: "Get Started",
+            onTap: () {
+              Navigator.pushNamed(context, 'SignInPage');
+            },
+            buttonColor: primarycolor,
+          ),
         ],
       ),
     );

@@ -18,7 +18,7 @@ class CustomButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 50,
         child: ElevatedButton(
-          onPressed: onTap,
+          onPressed: buttonColor == Colors.grey ? null : onTap,
           style: ElevatedButton.styleFrom(
             backgroundColor: buttonColor,
             shape: RoundedRectangleBorder(

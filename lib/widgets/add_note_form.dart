@@ -61,7 +61,8 @@ class _AddNoteFormState extends State<AddNoteForm> {
           BlocProvider.of<AddNoteCubit>(context).addNote(
             title: title!,
             subtitle: subtitle!,
-            color: Colors.cyanAccent.value,
+            // Default to a color close to AppBar (lightBlue in noteColors list)
+            color: 10,
             image: '', // Default empty image
           );
           Navigator.pop(context);
