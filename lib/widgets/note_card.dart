@@ -23,7 +23,6 @@ class NoteCard extends StatelessWidget {
           ),
         ),
         child: ListTile(
-          leading: CardContent(),
           title: Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: CustomText(text: note.title, fonstsize: 25),

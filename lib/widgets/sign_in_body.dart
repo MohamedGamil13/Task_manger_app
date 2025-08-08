@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger_app/cubits/login_cubit/login_cubit.dart';
 import 'package:task_manger_app/helpers/constants.dart';
 import 'package:task_manger_app/pages/Board_page.dart';
+import 'package:task_manger_app/widgets/Horzontail_divider.dart';
 import 'package:task_manger_app/widgets/custom_button.dart';
 import 'package:task_manger_app/widgets/custom_text.dart';
 import 'package:task_manger_app/widgets/data_list_tile.dart';
@@ -104,23 +105,10 @@ class _SignInBodyState extends State<SignInBody> {
                           style: TextStyle(color: primarycolor),
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const SignUpPage(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          "Create account",
-                          style: TextStyle(color: primarycolor),
-                        ),
-                      ),
                     ],
                   ),
                   SizedBox(height: 20),
+
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: CustomButton(
@@ -136,6 +124,29 @@ class _SignInBodyState extends State<SignInBody> {
                           ? Colors.grey
                           : primarycolor,
                     ),
+                  ),
+                  SizedBox(height: 25),
+                  HorzontailDivider(),
+                  SizedBox(height: 35),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Didn\'t have account? '),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const SignUpPage(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Create account",
+                          style: TextStyle(color: primarycolor),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
