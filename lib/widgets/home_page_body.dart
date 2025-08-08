@@ -1,65 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_manger_app/cubits/login_cubit/login_cubit.dart';
 import 'package:task_manger_app/helpers/app_signture.dart';
-import 'package:task_manger_app/helpers/dialog_helper.dart';
-import 'package:task_manger_app/widgets/custom_list_tile.dart';
 import 'package:task_manger_app/widgets/custom_text.dart';
-import 'package:loading_overlay/loading_overlay.dart';
 
 class HomePageBody extends StatelessWidget {
   const HomePageBody({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit, LoginState>(
-      listener: (context, state) {
-        if (state is LoginLoading) {
-          print('==========================================Loading');
-        } else if (state is LoginSucess) {
-          print('=============================Sucess');
-          Navigator.pushNamed(context, 'BordarPage');
-        } else if (state is LoginFailure) {
-          DialogHelper.showInfoDialog(
-            context: context,
-            title: 'Error',
-            description: 'there \'s an Error in internet',
-          );
-        }
-      },
-      builder: (context, state) {
-        bool isLoading = state is LoginLoading;
-        return LoadingOverlay(
-          isLoading: isLoading,
-          child: Column(
-            children: [
-              SizedBox(height: 100),
-              Padding(
-                padding: const EdgeInsets.only(left: 80.0),
-                child: AppSignture(fontSize: 50, logoHeight: 65),
-              ),
-              SizedBox(height: 100),
-              CustomText(text: 'Manage', fonstsize: 35),
-              CustomText(text: 'your task easily', fonstsize: 35),
-              Text("Easy way to manage your tasks "),
-              SizedBox(height: 85),
-              CustomListTile(
-                image: 'assets/images/GoogleLogo.png',
-                onpressed: () {
-                  // BlocProvider.of<LoginCubit>(context).signInWithGoogle();
-                  Navigator.pushNamed(context, 'BordarPage');
-                },
-              ),
-              CustomListTile(
-                image: 'assets/images/Facebook-Logo.jpg',
-                onpressed: () {
-                  Navigator.pushNamed(context, 'BordarPage');
-                },
-              ),
-            ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(height: 100),
+          Padding(
+            padding: const EdgeInsets.only(left: 80.0),
+            child: AppSignture(fontSize: 50, logoHeight: 65),
           ),
-        );
-      },
+          SizedBox(height: 100),
+          CustomText(text: 'Your thoughts, organized', fonstsize: 25),
+          Text("Fast,  Simple,  Secure ", style: TextStyle(fontSize: 15)),
+          SizedBox(height: 25),
+        ],
+      ),
     );
   }
 }

@@ -7,7 +7,7 @@ class AppLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
-      child: Image.asset('assets/images/letter-t.png'),
+      child: Image.asset('assets/images/letter-m.png'),
     );
   }
 }
