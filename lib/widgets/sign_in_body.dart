@@ -127,7 +127,7 @@ class _SignInBodyState extends State<SignInBody> {
                   ),
                   SizedBox(height: 25),
                   HorzontailDivider(),
-                  SizedBox(height: 35),
+                  SizedBox(height: 25),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
