@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger_app/cubits/login_cubit/login_cubit.dart';
 import 'package:task_manger_app/helpers/constants.dart';
-import 'package:task_manger_app/pages/Board_page.dart';
+import 'package:task_manger_app/pages/board_page.dart';
 import 'package:task_manger_app/widgets/custom_button.dart';
 import 'package:task_manger_app/widgets/custom_text.dart';
 import 'package:task_manger_app/widgets/data_list_tile.dart';
@@ -15,11 +15,11 @@ class SignUpBody extends StatefulWidget {
 }
 
 class _SignUpBodyState extends State<SignUpBody> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
 
@@ -34,7 +34,7 @@ class _SignUpBodyState extends State<SignUpBody> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginCubit(),
+      create: (_) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSucess) {
@@ -44,7 +44,10 @@ class _SignUpBodyState extends State<SignUpBody> {
                 backgroundColor: Colors.green,
               ),
             );
-            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const BoardPage()),
+            );
           } else if (state is LoginFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -61,64 +64,82 @@ class _SignUpBodyState extends State<SignUpBody> {
               child: Column(
                 children: [
                   const SizedBox(height: 120),
-                  Center(child: CustomText(text: 'Sign UP', fonstsize: 35)),
+                  const CustomText(text: 'Sign UP', fonstsize: 35),
                   const SizedBox(height: 60),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: DataListTile(
-                      icon: Icons.email,
-                      title: "Email",
-                      controller: _emailController,
-                      errorText: _getEmailError(state),
-                      onChanged: (email) {},
-                    ),
+
+                  // Email
+                  // Email
+                  DataListTile(
+                    icon: Icons.email,
+                    title: "Email",
+                    controller: _emailController,
+                    isPassword: false,
+                    onChanged: (value) {
+                      context.read<LoginCubit>().validateEmail(value.trim());
+                    },
+                    errorText: state is ValidationState
+                        ? state.emailError
+                        : null,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: DataListTile(
-                      icon: Icons.lock,
-                      title: "Password",
-                      controller: _passwordController,
-                      errorText: _getPasswordError(state),
-                      isPassword: !_isPasswordVisible,
-                      onChanged: (password) {},
-                      onTogglePasswordVisibility: () {
-                        setState(() {
-                          _isPasswordVisible = !_isPasswordVisible;
-                        });
-                      },
-                    ),
+
+                  // Password
+                  DataListTile(
+                    icon: Icons.lock,
+                    title: "Password",
+                    controller: _passwordController,
+                    isPassword: !_isPasswordVisible,
+                    onTogglePasswordVisibility: () {
+                      setState(() => _isPasswordVisible = !_isPasswordVisible);
+                    },
+                    onChanged: (value) {
+                      context.read<LoginCubit>().validatePassword(value.trim());
+                    },
+                    errorText: state is ValidationState
+                        ? state.passwordError
+                        : null,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: DataListTile(
-                      icon: Icons.lock_outline,
-                      title: "Confirm Password",
-                      controller: _confirmPasswordController,
-                      errorText: null,
-                      isPassword: !_isConfirmPasswordVisible,
-                      onChanged: (_) {
-                        setState(() {});
-                      },
-                      onTogglePasswordVisibility: () {
-                        setState(() {
-                          _isConfirmPasswordVisible =
-                              !_isConfirmPasswordVisible;
-                        });
-                      },
-                    ),
+
+                  // Confirm password
+                  DataListTile(
+                    icon: Icons.lock_outline,
+                    title: "Confirm Password",
+                    controller: _confirmPasswordController,
+                    isPassword: !_isConfirmPasswordVisible,
+                    onTogglePasswordVisibility: () {
+                      setState(
+                        () => _isConfirmPasswordVisible =
+                            !_isConfirmPasswordVisible,
+                      );
+                    },
+                    onChanged: (value) {
+                      final matches =
+                          value.trim() == _passwordController.text.trim();
+                      // لو حابب تعمل فاليديشن للـ confirm داخل الكيوبت ممكن تبعته من هنا
+                      // أو تسيبه يتحقق عند الضغط على الزر
+                    },
+                    errorText:
+                        (state is ValidationState &&
+                            _confirmPasswordController.text.isNotEmpty &&
+                            _confirmPasswordController.text.trim() !=
+                                _passwordController.text.trim())
+                        ? 'Passwords do not match'
+                        : null,
                   ),
+
                   const SizedBox(height: 20),
+
+                  // Sign up button
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: CustomButton(
                       text: state is LoginLoading ? 'Creating...' : 'Sign Up',
                       onTap: () {
-                        _handleSignUp(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const BoardPage()),
-                        );
+                        if (_formKey.currentState!.validate()) {
+                          context.read<LoginCubit>().signUp(
+                            emailAddress: _emailController.text.trim(),
+                            password: _passwordController.text.trim(),
+                          );
+                        }
                       },
                       buttonColor: state is LoginLoading
                           ? Colors.grey
@@ -132,50 +153,5 @@ class _SignUpBodyState extends State<SignUpBody> {
         },
       ),
     );
-  }
-
-  String? _getEmailError(LoginState state) {
-    if (state is ValidationState) return state.emailError;
-    return null;
-  }
-
-  String? _getPasswordError(LoginState state) {
-    if (state is ValidationState) return state.passwordError;
-    return null;
-  }
-
-  String? _getConfirmPasswordError() {
-    final password = _passwordController.text;
-    final confirm = _confirmPasswordController.text;
-    if (confirm.isEmpty) return 'Please confirm your password';
-    if (confirm != password) return 'Passwords do not match';
-    return null;
-  }
-
-  void _handleSignUp(BuildContext context) {
-    final email = _emailController.text.trim();
-    final password = _passwordController.text.trim();
-
-    context.read<LoginCubit>().validateForm(email, password);
-
-    final currentState = context.read<LoginCubit>().state;
-    final isFormValid =
-        currentState is ValidationState && currentState.isFormValid;
-    final confirmError = _getConfirmPasswordError();
-
-    if (isFormValid && confirmError == null) {
-      context.read<LoginCubit>().signUp(
-        emailAddress: email,
-        password: password,
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please fix the validation errors'),
-          backgroundColor: Colors.orange,
-        ),
-      );
-      setState(() {});
-    }
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger_app/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:task_manger_app/models/note_model.dart';
-import 'package:task_manger_app/widgets/card_content.dart';
 import 'package:task_manger_app/widgets/custom_text.dart';
 
 class NoteCard extends StatelessWidget {

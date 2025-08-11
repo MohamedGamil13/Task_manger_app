@@ -61,11 +61,11 @@ class LoginCubit extends Cubit<LoginState> {
   void signUp({required String emailAddress, required String password}) async {
     emit(LoginLoading());
     try {
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-            email: emailAddress,
-            password: password,
-          );
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailAddress,
+        password: password,
+      );
+
       emit(LoginSucess());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -74,7 +74,6 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginFailure('The account already exists for that email.'));
       }
     } catch (e) {
-      print(e);
       emit(LoginFailure(e.toString()));
     }
   }
@@ -83,7 +82,9 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginLoading());
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailAddress, password: password);
+        email: emailAddress,
+        password: password,
+      );
       emit(LoginSucess());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
